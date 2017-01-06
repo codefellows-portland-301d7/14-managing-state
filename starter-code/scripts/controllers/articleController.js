@@ -47,7 +47,7 @@
     Article.findWhere('category', ctx.params.categoryName, categoryData);
   };
 
-  // COMMENT: What does this method do?  What is it's execution path?
+  // COMMENT done: What does this method do?  What is it's execution path?
   // Does: If Article.all is populated it sets the array of article objects to the context object as ctx.articles. Otherwise it will fetch articles in the SQL db and populate Article.all and then set it to the context object.
   // Path: It's in the middleware chain for / and it gets called before articlesController.index
   articlesController.loadAll = function(ctx, next) {
