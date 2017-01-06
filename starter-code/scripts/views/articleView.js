@@ -13,6 +13,7 @@
   };
 
   // COMMENT: What does this method do?  What is it's execution path?
+  //populate filters invokes the handlebars compiler on the id option-template and then executes the text method.
   articleView.populateFilters = function() {
     var options,
       template = Handlebars.compile($('#option-template').text());
@@ -38,6 +39,7 @@
   };
 
   // COMMENT: What does this method do?  What is it's execution path?
+  // It is grabbing the filters id and executing an event handler on it, using the .one() method instead of .on() which means the click event only fires on the first click. The parametes are change and select. The filters id is the un-ordered list that holds the two select options, category-filter and author-filter. We are declaring a variable called resource which takes the -filter off of whichever was clicked, author-filter or cateogry-filter. On line 46, it is calling routes and it will invoke the articlesController. And depending on which filter was clicked, it will invoke the appropriate articleController (authorName or CategpryName).
   articleView.handleFilters = function() {
     $('#filters').one('change', 'select', function() {
       var resource = this.id.replace('-filter', '');
@@ -82,6 +84,7 @@
   };
 
   // COMMENT: What does this method do?  What is it's execution path?
+  // This method takes the articles id and shows the content. Then it looks at the siblings of articles and hides it. Then, we are going to remove the article section. We are going to take an article and for each article, we will append it to the section with the id article and render it. Then, we are going to invoke the populateFilters and handleFilters functions. If the article is greater than one, it's then going to to hide part of the article body.
   articleView.index = function(articles) {
     $('#articles').show().siblings().hide();
 
