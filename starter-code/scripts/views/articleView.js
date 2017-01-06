@@ -12,7 +12,8 @@
     return template(article);
   };
 
-  // COMMENT: What does this method do?  What is it's execution path?
+  // COMMENT: What does this method do?  What is it's execution path? This is a syncronous code that is function declaration that gets called befor handle filters & after handlebars has been complied.
+  // Declares a variable called options & uses handlebars to complie & fill option template. Calls & maps the allAuthors array that's a property of Article. It prevents duplication of authors when it appends authors to the author filter field. It is also using article.allCategories to fill in category filter field through a maping of SQL catagory rows.
   articleView.populateFilters = function() {
     var options,
       template = Handlebars.compile($('#option-template').text());
@@ -37,7 +38,7 @@
     });
   };
 
-  // COMMENT: What does this method do?  What is it's execution path?
+  // COMMENT: What does this method do?  What is it's execution path? Function that gets called after filters are populated by populatFilters function. On change or select in the filters field, a function that declares a variable called resource sets it to id that has replaced the default state & calls page function that loadsn the selection on a the page with a modified url.
   articleView.handleFilters = function() {
     $('#filters').one('change', 'select', function() {
       var resource = this.id.replace('-filter', '');
@@ -81,7 +82,7 @@
     $('#article-json').val(JSON.stringify(article) + ',');
   };
 
-  // COMMENT: What does this method do?  What is it's execution path?
+  // COMMENT: What does this method do?  What is it's execution path? Declared in articleView.js but actually with context dependancy in articleController.js - meaning that it's called for loadById, loadByAuthor, loadByCategory, & loadAll depending on how user has intereated with the filters or with the url.  Shows articles & hides siblings of #articles. Removes every article associated with articles ID from DOM & then runs over array of array of articles depending on the context of the function that calls it & rendering to the DOM those specific articles.
   articleView.index = function(articles) {
     $('#articles').show().siblings().hide();
 
