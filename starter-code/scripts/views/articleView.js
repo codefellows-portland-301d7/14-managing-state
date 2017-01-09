@@ -13,6 +13,11 @@
   };
 
   // COMMENT: What does this method do?  What is it's execution path?
+  /*DONE
+  Each route change > calls > articleView.index > calls > articleView.populateFilters
+  returns a compiled handlebars template with the appropriate values for the article objects that corespond to this call.
+  */
+
   articleView.populateFilters = function() {
     var options,
       template = Handlebars.compile($('#option-template').text());
@@ -38,6 +43,11 @@
   };
 
   // COMMENT: What does this method do?  What is it's execution path?
+  /* DONE
+  Each articlesController function > calls > articleController.index > calls > articleView.index > calls articleView.handleFilters
+  JQuery selects DOM node with the id of "filters" and attaches a handler to  a change list selection event. On callback, the handler declares a resource variable with the value = the id of selected list item, then removes the '-filter'.
+  Result: The resource variable and the value of the selected element are displayed in the location bar and all whitespace will is replaced with a '+'.
+  */
   articleView.handleFilters = function() {
     $('#filters').one('change', 'select', function() {
       var resource = this.id.replace('-filter', '');
@@ -82,6 +92,12 @@
   };
 
   // COMMENT: What does this method do?  What is it's execution path?
+  /*
+  Each articlesController function > calls > articleController.index > calls > articleView.index
+  This method displays only the content in the article tab. All previously displayed articles are removes and the appropriate articles are displayed.
+  The url is again manipulated in the location bar to emulate navigation and describe state change.
+  When more than one article is displayed, only the first 2 elements of each article-body are displayed.
+  */
   articleView.index = function(articles) {
     $('#articles').show().siblings().hide();
 
